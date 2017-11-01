@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
     filename: "[name].css",
@@ -51,5 +52,10 @@ module.exports = {
             }
         }),
         new CleanWebpackPlugin(pathsToClean, cleanOptions),
+        new BrowserSyncPlugin({
+            host: 'localhost',
+            port: 3000,
+            server: { baseDir: ['dist'] }
+          })
     ]
 };
