@@ -4,13 +4,24 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
+const inject = require('gulp-inject');
+const clean = require('gulp-clean');
+const runSequence = require('run-sequence');
 
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['build'], function() {
+
         browserSync.init({
             server: "./dist"
         });
-        gulp.watch("src/styles/**/*.scss", ['sass']);
-        gulp.watch("src/*.html", ['html']);
+
+        gulp.watch("src/styles/**/*.scss", ['sass', 'inject']);
+        gulp.watch("src/*.html", ['html', 'inject']);
+});
+
+gulp.task('build', function(callback) {
+    runSequence(['clean', 'html', 'sass', 'inject'], function() {
+        callback();
+    });
 });
 
 gulp.task('html', function() {
@@ -19,13 +30,18 @@ gulp.task('html', function() {
         .pipe(browserSync.stream());
 });
 
+gulp.task('inject', function() {
+    gulp.src('./dist/*.html')
+        .pipe(inject(gulp.src(['./dist/**/*.js', './dist/**/*.css'], {read: false}), {relative: true}))
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('sass', function() {
     return gulp.src('./src/styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/style'))
+        .pipe(gulp.dest('./dist/styles'))
         .pipe(browserSync.stream());
 });
 
@@ -38,6 +54,11 @@ gulp.task('concat', function() {
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('clean', function() {
+    return gulp.src('./dist/*', {read: false})
+        .pipe(clean());
 });
 
 gulp.task('default', ['serve']);
