@@ -1,3 +1,4 @@
+const colorPicker = document.querySelector('.color-picker');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -17,7 +18,13 @@ let drawingColor = '#111111';
 
 function draw(e) {
     if(!isDrawing) return;
-    ctx.strokeStyle = drawingColor;
+
+    if (colorPicker == '') {
+        ctx.strokeStyle = drawingColor;
+    } else {
+        ctx.strokeStyle = colorPicker.value;
+    }
+
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);

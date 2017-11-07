@@ -7,14 +7,14 @@ const clean = require('gulp-clean');
 const runSequence = require('run-sequence');
 const minifyCss = require('gulp-minify-css');
 const uglify = require('gulp-uglify');
-const minifyHtml = require('gulp-minify-html');
+const htmlmin = require('gulp-htmlmin');
 const cache = require('gulp-cache');
 
 gulp.task('serve', ['build'], function() {
     browserSync.init({
         server: './dist'
     });
-    gulp.watch('src/*.html', ['html', 'inject']);
+    gulp.watch('src/*.html', ['html', 'build']);
     gulp.watch('src/styles/**/*.scss', ['sass', 'inject']);
     gulp.watch('src/scripts/**/*.js', ['js', 'inject']);
 });
@@ -26,7 +26,6 @@ gulp.task('build', function(callback) {
 gulp.task('html', function() {
     return gulp.src('./src/**/*.html')
         .pipe(gulp.dest('./dist'))
-        .pipe(cache.clear())
         .pipe(browserSync.stream());
 });
 
@@ -59,8 +58,12 @@ gulp.task('js', function() {
 
 gulp.task('clean', function() {
     return gulp.src('./dist/*', {read: false})
-        .pipe(cache.clear())
         .pipe(clean());
 });
+
+gulp.task('clean:html', function() {
+    return gulp.src('./dist/**/*.html', {read: false})
+        .pipe(clean());
+})
 
 gulp.task('default', ['serve']);
