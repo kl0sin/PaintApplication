@@ -5,11 +5,16 @@
     background-color: $lightgreen;
     width: 200px;
     height: 100vh;
+    padding: 15px;
+    .text {
+        color: $white;
+        font-weight: 600;
+    }
 }
 .color-picker {
     display: block;
     margin: 15px auto;
-    width: 90%;
+    width: 100%;
     font-size: .7em;
     text-align: center;
 }
@@ -19,8 +24,8 @@
     text-align: center;
     font-size: 0.8em;
     text-transform: uppercase;
-    margin: 15px 10px;
-    width: 90%;
+    margin: 15px 0;
+    width: calc(100% - 30px);
     display: block;
     text-decoration: none;
     padding: 10px 10px;
