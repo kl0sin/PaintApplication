@@ -6,12 +6,12 @@
     width: 200px;
     height: 100vh;
     padding: 15px;
-    .text {
+    .p {
         color: $white;
         font-weight: 600;
     }
 }
-.color-picker {
+input {
     display: block;
     margin: 15px auto;
     width: 100%;

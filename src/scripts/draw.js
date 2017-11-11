@@ -1,4 +1,5 @@
 const colorPicker = document.querySelector('.color-picker');
+const brushSizeInput = document.querySelector('.brush-size');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -12,10 +13,11 @@ let hue = 0;
 let direction = true;
 let fillColor = '#ffffff';
 let drawingColor = '#111111';
+let brushSize = 5; //default value
 
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.lineWidth = 5;
+ctx.lineWidth = brushSize;
 ctx.fillStyle = fillColor;
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -34,6 +36,11 @@ function draw(e) {
     ctx.stroke();
     [lastX, lastY] = [e.offsetX, e.offsetY];
 };
+
+brushSizeInput.addEventListener('change', function() {
+    ctx.lineWidth = brushSizeInput.value;
+    document.querySelector('.brush-size-value').innerHTML = brushSizeInput.value;
+});
 
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mousedown', (e) => {
