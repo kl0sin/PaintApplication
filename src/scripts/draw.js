@@ -5,16 +5,19 @@ const ctx = canvas.getContext('2d');
 canvas.height = canvas.offsetHeight - 1;
 canvas.width = canvas.offsetWidth - 1;
 
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.lineWidth = 5;
-
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 let hue = 0;
 let direction = true;
+let fillColor = '#ffffff';
 let drawingColor = '#111111';
+
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 5;
+ctx.fillStyle = fillColor;
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 function draw(e) {
     if(!isDrawing) return;
