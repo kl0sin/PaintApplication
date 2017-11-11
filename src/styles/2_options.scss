@@ -1,10 +1,35 @@
+@import "variables";
+
 .options {
-    background-color: lightseagreen;
-    width: 60px;
+    position: relative;
+    background-color: $lightgreen;
+    width: 200px;
     height: 100vh;
 }
 .color-picker {
-    width: 100%;
+    display: block;
+    margin: 15px auto;
+    width: 90%;
     font-size: .7em;
     text-align: center;
+}
+.save-photo {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin: 15px 10px;
+    width: 90%;
+    display: block;
+    text-decoration: none;
+    padding: 10px 10px;
+    color: $white;
+    background-color: darken($lightgreen, 30%);
+    transition: background-color, color 0.3s;
+    &:hover {
+        background-color: $lightgreen;
+        color: darken($lightgreen, 30%);
+        font-weight: 600;
+    }
 }

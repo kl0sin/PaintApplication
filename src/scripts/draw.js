@@ -2,8 +2,8 @@ const colorPicker = document.querySelector('.color-picker');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.height = canvas.offsetHeight - 1;
-canvas.width = canvas.offsetWidth - 1;
+canvas.height = canvas.offsetHeight;
+canvas.width = canvas.offsetWidth;
 
 let isDrawing = false;
 let lastX = 0;
