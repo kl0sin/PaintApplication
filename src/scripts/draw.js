@@ -37,9 +37,17 @@ function draw(e) {
     [lastX, lastY] = [e.offsetX, e.offsetY];
 };
 
-brushSizeInput.addEventListener('change', function() {
+function listener() {
     ctx.lineWidth = brushSizeInput.value;
     document.querySelector('.brush-size-value').innerHTML = brushSizeInput.value;
+}
+
+brushSizeInput.addEventListener('mousedown', function() {
+    listener();
+    brushSizeInput.addEventListener('mousemove', listener);
+});
+brushSizeInput.addEventListener('mouseup', function() {
+    brushSizeInput.removeEventListener('mousemove', listener);
 });
 
 canvas.addEventListener('mousemove', draw);
