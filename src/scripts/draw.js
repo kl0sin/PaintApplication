@@ -2,6 +2,7 @@ const colorPicker = document.querySelector('.color-picker');
 const brushSizeInput = document.querySelector('.brush-size');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const colors = document.querySelectorAll('li');
 
 canvas.height = canvas.offsetHeight;
 canvas.width = canvas.offsetWidth;
@@ -14,6 +15,7 @@ let direction = true;
 let fillColor = '#ffffff';
 let drawingColor = '#111111';
 let brushSize = 5; //default value
+let selectedColor;
 
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
@@ -21,14 +23,30 @@ ctx.lineWidth = brushSize;
 ctx.fillStyle = fillColor;
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+
+function selectColor() {
+    if (!this.classList.contains('active-color')) {
+        for (var i = 0; i < colors.length; i++) {
+            colors[i].classList.remove('active-color');
+        }
+        this.classList.add('active-color');
+        selectedColor = this.dataset.color;
+    } else {
+        return;
+    }
+}
+
+for (var i = 0; i < colors.length; i++)  {
+    colors[i].addEventListener('click', selectColor, false);
+    if (colors[i].classList.contains('active-color')) {
+        selectedColor = colors[i].dataset.color;
+    }
+};
+
 function draw(e) {
     if(!isDrawing) return;
 
-    if (colorPicker == '') {
-        ctx.strokeStyle = drawingColor;
-    } else {
-        ctx.strokeStyle = colorPicker.value;
-    }
+    ctx.strokeStyle = selectedColor;
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);

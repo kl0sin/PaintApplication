@@ -27,6 +27,7 @@ gulp.task('build', function(callback) {
 
 gulp.task('html', function() {
     return gulp.src('./src/**/*.html')
+        .pipe(cache.clear())
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.stream());
 });
@@ -50,6 +51,7 @@ gulp.task('sass', function() {
 
 gulp.task('js', function() {
     return gulp.src('src/scripts/**/*.js')
+        .pipe(cache.clear())
         .pipe(gulp.dest('dist/scripts'))
         .pipe(browserSync.stream());
 });
