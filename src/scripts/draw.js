@@ -30,7 +30,7 @@ function selectColor() {
             colors[i].classList.remove('active-color');
         }
         this.classList.add('active-color');
-        selectedColor = this.dataset.color;
+        selectedColor = this.dataset.hex;
     } else {
         return;
     }
@@ -39,7 +39,7 @@ function selectColor() {
 for (var i = 0; i < colors.length; i++)  {
     colors[i].addEventListener('click', selectColor, false);
     if (colors[i].classList.contains('active-color')) {
-        selectedColor = colors[i].dataset.color;
+        selectedColor = colors[i].dataset.hex;
     }
 };
 
