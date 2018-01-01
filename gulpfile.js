@@ -10,6 +10,7 @@ const uglify = require('gulp-uglify');
 const htmlmin = require('gulp-htmlmin');
 const cache = require('gulp-cache');
 const image = require('gulp-image');
+const ghPages = require('gulp-gh-pages');
 
 gulp.task('serve', ['build'], function() {
     browserSync.init({
@@ -71,5 +72,10 @@ gulp.task('clean:html', function() {
     return gulp.src('./dist/**/*.html', {read: false})
         .pipe(clean());
 })
+
+gulp.task('deploy', function() {
+    return gulp.src('./dist/**/*')
+        .pipe(ghPages());
+});
 
 gulp.task('default', ['serve']);
