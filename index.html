@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Paint Application</title>
+    
+    <!-- inject:css -->
+    <link rel="stylesheet" href="styles/0_reset.css">
+    <link rel="stylesheet" href="styles/1_main.css">
+    <link rel="stylesheet" href="styles/2_options.css">
+    <!-- endinject -->
+</head>
+<body>
+
+    <nav class="options">
+        <p class='text'>Color:</p>
+        <ul class="colors">
+            <li data-hex="#FF4016" data-color="red" class="active-color"></li>
+            <li data-hex="#FE8818" data-color="orange"></li>
+            <li data-hex="#F9E113" data-color="yellow"></li>
+            <li data-hex="#77D90C" data-color="green"></li>
+            <li data-hex="#2EC6AC" data-color="teal"></li>
+            <li data-hex="#4B71FF" data-color="blue"></li>
+            <li data-hex="#C029EA" data-color="purple"></li>
+            <li data-hex="#FF97BE" data-color="pink"></li>
+            <li data-hex="#DB8739" data-color="brown"></li>
+            <li data-hex="#222222" data-color="black"></li>
+            <li data-hex="#D8D8D8" data-color="gray"></li>
+            <li data-hex="#ffffff" data-color="white"></li>
+        </ul>
+        <p>Brush size: <span class="brush-size-value">5</span></p>
+        <input type="range" class="brush-size" min="1" max="100" step="1" value="5">
+
+        <a href="#" class="save-photo">Download picture</a>
+    </nav>
+    <main class="area">
+        <canvas>
+            
+        </canvas>
+        <div class="more-info">
+            
+        </div>
+    </main>
+
+    <footer class='version'>
+        v.1.0.1
+    </footer>
+    
+    <!-- inject:js -->
+    <script src="scripts/colorPicker.js"></script>
+    <script src="scripts/draw.js"></script>
+    <script src="scripts/savingPhoto.js"></script>
+    <!-- endinject -->
+</body>
+</html>
